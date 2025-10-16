@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Railway Reservation System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/App/App.css">
+</head>
+
+<body>    
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fas fa-train"></i> Railway Reservation</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/trains"><i class="fas fa-train"></i> Trains</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tickets"><i class="fas fa-ticket-alt"></i> Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users"><i class="fas fa-users"></i> Users</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt"></i> Login</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">User Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold text-white mb-3 animate-fade-in">Welcome to Railway Reservation System</h1>
+        <p class="lead text-white mb-5 animate-fade-in-delay">Book train tickets easily and securely. Experience seamless travel planning with our modern interface.</p>
+        <div class="row g-3 justify-content-center mb-5">
+          <div class="col-md-4">
+            <a href="/tickets" class="btn btn-primary btn-lg w-100 hero-btn">
+              <i class="fas fa-ticket-alt"></i> Book Tickets Now
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="/trains" class="btn btn-outline-light btn-lg w-100 hero-btn">
+              <i class="fas fa-search"></i> Find Trains
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section py-5">
+    <div class="container">
+      <div class="row text-center mb-5">
+        <div class="col-12">
+          <h2 class="section-title">Why Choose Our System?</h2>
+          <p class="section-subtitle">Experience the best in railway reservation technology</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-lightning-bolt"></i>
+            </div>
+            <h4>Fast Booking</h4>
+            <p>Book tickets in seconds with our streamlined process</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4>Secure & Safe</h4>
+            <p>Your data is protected with enterprise-grade security</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h4>Easy Management</h4>
+            <p>Manage trains, tickets, and users effortlessly</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="stats-section py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Trains Available</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Happy Passengers</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Customer Support</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK ACTIONS SECTION -->
+  <section class="quick-actions-section py-5 bg-light">
+    <div class="container">
+      <div class="row text-center mb-4">
+        <div class="col-12">
+          <h2 class="section-title">Quick Actions</h2>
+          <p class="section-subtitle">Access all features with just one click</p>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-3">
+          <a href="/trains" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-train"></i>
+            </div>
+            <h5>Manage Trains</h5>
+            <p>Add, edit, and view train schedules</p>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="/tickets" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <h5>Book Tickets</h5>
+            <p>Reserve seats for your journey</p>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="/users" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h5>Manage Users</h5>
+            <p>Handle user accounts and profiles</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="/trains">Trains</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/users">Users</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Support</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Follow Us</h5>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="text-center mt-3">© 2025 Railway Reservation System | All Rights Reserved</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

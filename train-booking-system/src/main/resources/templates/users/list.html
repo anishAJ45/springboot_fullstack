@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/App/App.css">
+</head>
+<body>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fas fa-train"></i> Railway Reservation</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/trains"><i class="fas fa-train"></i> Trains</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tickets"><i class="fas fa-ticket-alt"></i> Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/users"><i class="fas fa-users"></i> Users</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt"></i> Login</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">User Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1><i class="fas fa-users"></i> Users</h1>
+      <a href="/users/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add New User</a>
+    </div>
+
+    <!-- Search/Filter Section -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="searchName" placeholder="Search by Name">
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="searchEmail" placeholder="Search by Email">
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-secondary w-100" id="clearFilters"><i class="fas fa-times"></i> Clear Filters</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover" id="usersTable">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user : ${users}" class="user-row">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+              <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${user.id}" title="Delete"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this user?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a id="confirmDelete" href="#" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/App/App.js"></script>
+  <script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Search and Filter Functionality
+    document.getElementById('searchName').addEventListener('input', filterTable);
+    document.getElementById('searchEmail').addEventListener('input', filterTable);
+
+    function filterTable() {
+      const nameFilter = document.getElementById('searchName').value.toLowerCase();
+      const emailFilter = document.getElementById('searchEmail').value.toLowerCase();
+      const rows = document.querySelectorAll('.user-row');
+
+      rows.forEach(row => {
+        const name = row.cells[1].textContent.toLowerCase();
+        const email = row.cells[2].textContent.toLowerCase();
+
+        if (name.includes(nameFilter) && email.includes(emailFilter)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Clear Filters
+    document.getElementById('clearFilters').addEventListener('click', function() {
+      document.getElementById('searchName').value = '';
+      document.getElementById('searchEmail').value = '';
+      filterTable();
+    });
+
+    // Delete Modal Functionality
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var userId = button.getAttribute('th:data-id');
+      var confirmDelete = document.getElementById('confirmDelete');
+      confirmDelete.href = '/users/delete/' + userId;
+    });
+  </script>
+</body>
+</html>
